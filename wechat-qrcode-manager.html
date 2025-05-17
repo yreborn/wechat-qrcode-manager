@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信群二维码管理系统</title>
+    <link rel="stylesheet" href="wechat-qrcode-manager.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="logo">
+            <i class="fab fa-weixin"></i>
+            <h1>微信群二维码管理系统</h1>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="搜索群名称...">
+            <button id="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+        <button id="add-qrcode-btn" class="action-btn"><i class="fas fa-plus"></i> 添加群组</button>
+    </header>
+
+    <main>
+        <div class="filter-bar">
+            <div class="filter-options">
+                <span class="filter active" data-filter="all">全部</span>
+                <span class="filter" data-filter="active">活跃</span>
+                <span class="filter" data-filter="inactive">非活跃</span>
+            </div>
+            <div class="view-options">
+                <span class="view-option active" data-view="grid"><i class="fas fa-th"></i></span>
+                <span class="view-option" data-view="list"><i class="fas fa-list"></i></span>
+            </div>
+        </div>
+
+        <div class="qrcode-container grid-view" id="qrcode-list">
+            <!-- 二维码卡片将通过JavaScript动态生成 -->
+        </div>
+    </main>
+</div>
+
+<!-- 添加/编辑群组的模态窗口 -->
+<div class="modal" id="qrcode-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modal-title">添加新群组</h2>
+            <span class="close-btn">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="qrcode-form">
+                <div class="form-group">
+                    <label for="group-name">群名称</label>
+                    <input type="text" id="group-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="group-desc">群描述</label>
+                    <textarea id="group-desc"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="group-qrcode">群二维码</label>
+                    <div class="upload-area">
+                        <input type="file" id="group-qrcode" accept="image/*">
+                        <div class="upload-preview">
+                            <img id="qrcode-preview" src="" alt="">
+                            <span>点击或拖拽上传图片</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="group-avatar">群头像</label>
+                    <div class="upload-area">
+                        <input type="file" id="group-avatar" accept="image/*">
+                        <div class="upload-preview">
+                            <img id="avatar-preview" src="" alt="">
+                            <span>点击或拖拽上传图片</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="group-status">状态</label>
+                    <select id="group-status">
+                        <option value="active">活跃</option>
+                        <option value="inactive">非活跃</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="group-tags">标签</label>
+                    <input type="text" id="group-tags" placeholder="用逗号分隔多个标签">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">保存</button>
+                    <button type="button" class="cancel-btn">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="wechat-qrcode-manager.js"></script>
+</body>
+</html>
