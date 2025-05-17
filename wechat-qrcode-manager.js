@@ -4,8 +4,8 @@ const demoQrcodes = [
         id: 1,
         name: "技术交流群",
         description: "讨论最新的前端和后端技术，分享学习资源和开发经验。每周五有技术分享会。",
-        qrcode: "https://via.placeholder.com/300/1aad19/FFFFFF?text=技术交流群",
-        avatar: "https://via.placeholder.com/300/1aad19/FFFFFF?text=技术",
+        qrcode: "WechatIMG832.jpg",
+        avatar: "WechatIMG832.jpg",
         status: "active",
         tags: ["技术", "前端", "后端", "学习"]
     },
@@ -13,47 +13,11 @@ const demoQrcodes = [
         id: 2,
         name: "产品设计群",
         description: "交流产品设计理念，UI/UX设计趋势，以及用户研究方法。",
-        qrcode: "https://via.placeholder.com/300/2980b9/FFFFFF?text=产品设计群",
-        avatar: "https://via.placeholder.com/300/2980b9/FFFFFF?text=设计",
+        qrcode: "WechatIMG832.jpg",
+        avatar: "WechatIMG832.jpg",
         status: "active",
         tags: ["设计", "UI", "UX", "产品"]
     },
-    {
-        id: 3,
-        name: "市场营销群",
-        description: "分享市场营销策略，品牌推广方法，以及最新的营销趋势。",
-        qrcode: "https://via.placeholder.com/300/8e44ad/FFFFFF?text=市场营销群",
-        avatar: "https://via.placeholder.com/300/8e44ad/FFFFFF?text=营销",
-        status: "inactive",
-        tags: ["营销", "推广", "品牌"]
-    },
-    {
-        id: 4,
-        name: "创业交流群",
-        description: "创业者交流平台，分享创业经验，讨论商业模式，寻找合作伙伴。",
-        qrcode: "https://via.placeholder.com/300/c0392b/FFFFFF?text=创业交流群",
-        avatar: "https://via.placeholder.com/300/c0392b/FFFFFF?text=创业",
-        status: "active",
-        tags: ["创业", "商业", "合作"]
-    },
-    {
-        id: 5,
-        name: "AI研究群",
-        description: "人工智能技术研究与应用讨论，包括机器学习、深度学习、自然语言处理等领域。",
-        qrcode: "https://via.placeholder.com/300/27ae60/FFFFFF?text=AI研究群",
-        avatar: "https://via.placeholder.com/300/27ae60/FFFFFF?text=AI",
-        status: "active",
-        tags: ["AI", "机器学习", "深度学习"]
-    },
-    {
-        id: 6,
-        name: "区块链交流群",
-        description: "区块链技术与应用讨论，加密货币市场分析，Web3项目分享。",
-        qrcode: "https://via.placeholder.com/300/f39c12/FFFFFF?text=区块链交流群",
-        avatar: "https://via.placeholder.com/300/f39c12/FFFFFF?text=区块链",
-        status: "inactive",
-        tags: ["区块链", "加密货币", "Web3"]
-    }
 ];
 
 // 存储当前数据和状态
@@ -227,17 +191,17 @@ function renderQrcodes() {
 
         // 添加事件监听器
         qrcodeList.appendChild(card);
-        
+
         // 查看二维码
         card.querySelector('.view-qr').addEventListener('click', () => {
             viewQrcode(qrcode.id);
         });
-        
+
         // 编辑二维码
         card.querySelector('.edit-qr').addEventListener('click', () => {
             editQrcode(qrcode.id);
         });
-        
+
         // 删除二维码
         card.querySelector('.delete-qr').addEventListener('click', () => {
             deleteQrcode(qrcode.id);
@@ -251,8 +215,8 @@ function handleSearch() {
     if (searchTerm === '') {
         qrcodes = [...demoQrcodes];
     } else {
-        qrcodes = demoQrcodes.filter(qrcode => 
-            qrcode.name.toLowerCase().includes(searchTerm) || 
+        qrcodes = demoQrcodes.filter(qrcode =>
+            qrcode.name.toLowerCase().includes(searchTerm) ||
             qrcode.description.toLowerCase().includes(searchTerm) ||
             qrcode.tags.some(tag => tag.toLowerCase().includes(searchTerm))
         );
@@ -280,19 +244,19 @@ function closeModal() {
 // 处理表单提交
 function handleFormSubmit(e) {
     e.preventDefault();
-    
+
     const formData = {
         name: document.getElementById('group-name').value,
         description: document.getElementById('group-desc').value,
         status: document.getElementById('group-status').value,
         tags: document.getElementById('group-tags').value.split(',').map(tag => tag.trim()).filter(tag => tag !== '')
     };
-    
+
     // 在实际应用中，这里应该处理文件上传
     // 这里我们使用预览图像的src作为示例
     formData.qrcode = qrcodePreview.src || 'https://via.placeholder.com/300/1aad19/FFFFFF?text=新群组';
     formData.avatar = avatarPreview.src || 'https://via.placeholder.com/300/1aad19/FFFFFF?text=新群组';
-    
+
     if (currentEditId) {
         // 编辑现有群组
         const index = qrcodes.findIndex(qr => qr.id === currentEditId);
@@ -307,15 +271,15 @@ function handleFormSubmit(e) {
             ...formData
         });
     }
-    
+
     // 更新原始数据（在实际应用中，这里应该是API调用）
     demoQrcodes.length = 0;
     demoQrcodes.push(...qrcodes);
-    
+
     // 关闭模态窗口并重新渲染
     closeModal();
     renderQrcodes();
-    
+
     // 显示成功消息（可以使用toast或其他通知组件）
     showNotification(currentEditId ? '群组已更新' : '新群组已添加');
 }
@@ -341,7 +305,7 @@ function viewQrcode(id) {
         const viewModal = document.createElement('div');
         viewModal.className = 'modal';
         viewModal.style.display = 'flex';
-        
+
         viewModal.innerHTML = `
             <div class="modal-content" style="max-width: 400px;">
                 <div class="modal-header">
@@ -354,16 +318,16 @@ function viewQrcode(id) {
                 </div>
             </div>
         `;
-        
+
         document.body.appendChild(viewModal);
         document.body.style.overflow = 'hidden';
-        
+
         // 关闭按钮事件
         viewModal.querySelector('.close-btn').addEventListener('click', () => {
             document.body.removeChild(viewModal);
             document.body.style.overflow = '';
         });
-        
+
         // 点击背景关闭
         viewModal.addEventListener('click', (e) => {
             if (e.target === viewModal) {
@@ -379,19 +343,19 @@ function editQrcode(id) {
     const qrcode = qrcodes.find(qr => qr.id === id);
     if (qrcode) {
         currentEditId = id;
-        
+
         // 填充表单
         document.getElementById('group-name').value = qrcode.name;
         document.getElementById('group-desc').value = qrcode.description;
         document.getElementById('group-status').value = qrcode.status;
         document.getElementById('group-tags').value = qrcode.tags.join(', ');
-        
+
         // 显示图片预览
         qrcodePreview.src = qrcode.qrcode;
         qrcodePreview.style.display = 'block';
         avatarPreview.src = qrcode.avatar;
         avatarPreview.style.display = 'block';
-        
+
         // 打开模态窗口
         openModal(true);
     }
@@ -401,11 +365,11 @@ function editQrcode(id) {
 function deleteQrcode(id) {
     if (confirm('确定要删除这个群组吗？')) {
         qrcodes = qrcodes.filter(qr => qr.id !== id);
-        
+
         // 更新原始数据（在实际应用中，这里应该是API调用）
         demoQrcodes.length = 0;
         demoQrcodes.push(...qrcodes);
-        
+
         renderQrcodes();
         showNotification('群组已删除');
     }
@@ -431,20 +395,20 @@ function showNotification(message) {
         opacity: 0;
         transition: all 0.3s ease;
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     // 显示通知
     setTimeout(() => {
         notification.style.transform = 'translateY(0)';
         notification.style.opacity = '1';
     }, 10);
-    
+
     // 自动隐藏通知
     setTimeout(() => {
         notification.style.transform = 'translateY(100px)';
         notification.style.opacity = '0';
-        
+
         // 移除元素
         setTimeout(() => {
             document.body.removeChild(notification);
